@@ -40,6 +40,14 @@ RUN apt-get update && \
       git && \
     apt-get clean
 ```
+If compiling against `python 3.11` or newer, you have to allow installation of whl packages from external sources. Add the following line in `tensorflow/lite/tools/pip_package/Dockerfile.py3`:
+```
+    RUN ln -sf /usr/bin/python$PYTHON_VERSION /usr/bin/python3
+    RUN curl -OL https://bootstrap.pypa.io/get-pip.py
+->  RUN rm /usr/lib/python3.11/EXTERNALLY-MANAGED
+    RUN python3 get-pip.py
+    RUN rm get-pip.py
+```
 
 - Edit Makefile to your system `tensorflow/lite/tools/pip_package/Makefile`:
 
