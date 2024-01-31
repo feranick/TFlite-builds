@@ -4,7 +4,9 @@ TFlite cross-platform builds
 
 ##Why this repo?
 
-The information provided in the [official tensorflow lite page for building `whl` packages for ARM](https://www.tensorflow.org/lite/guide/build_cmake_pip) to cross-compile TFlite for different architectures is a good start. However there seem to be several issues. This repo aims at providing more info towards successful compilation. And some binaries as well.
+The information provided in the [official tensorflow lite page for building `whl` packages for ARM](https://www.tensorflow.org/lite/guide/build_cmake_pip) to cross-compile TFlite for different architectures is a good start. However there seem to be several issues. This repo aims at providing more info towards successful compilation. And some binaries as well. 
+
+    The provided builds are fully compatible with  [Coral.ai EdgeTPU through the updated libedgetpu drivers](https://github.com/feranick/libedgetpu).
 
 ## Building
 
