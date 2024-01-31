@@ -61,10 +61,8 @@ $ make -C tensorflow/lite/tools/pip_package docker-build TENSORFLOW_TARGET=aarch
 
 These are the supported targets.
 
-Target 	Target architecture 	Comments
-armhf 	ARMv7 VFP with Neon 	Compatible with Raspberry Pi 3 and 4
-rpi0 	ARMv6 	Compatible with Raspberry Pi Zero
-aarch64 	aarch64 (ARM 64-bit) 	Coral Mendel Linux 4.0
-Raspberry Pi with Ubuntu Server 20.04.01 LTS 64-bit
-native 	Your workstation 	It builds with "-mnative" optimization
+- `armhf`:  ARMv7 VFP with Neon Compatible with Raspberry Pi 3 and 4
+- `rpi0`: ARMv6 Compatible with Raspberry Pi Zero
+- `aarch64`: aarch64 (ARM 64-bit) Coral Mendel Linux 4.0 or Raspberry Pi with Ubuntu Server 20.04.01 LTS 64-bit of 22.04.x LTS 64-bit
+- `native`: 	Your workstation 	It builds with "-mnative" optimization
 
