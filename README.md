@@ -77,7 +77,12 @@ These are the supported targets.
 - `native`: 	Your workstation 	It builds with "-mnative" optimization
 
 ## Building - Native
+### Using Bazel
+```
+PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
+```
 
+### Using CMake
 ```
 PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
 ```
