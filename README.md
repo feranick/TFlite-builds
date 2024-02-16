@@ -8,7 +8,7 @@ The information provided in the [official tensorflow lite page for building `whl
 
     The provided builds are fully compatible with  [Coral.ai EdgeTPU through the updated libedgetpu drivers](https://github.com/feranick/libedgetpu).
 
-## Building
+## Building - Docker
 
 - Install docker:
 
@@ -76,3 +76,8 @@ These are the supported targets.
 - `aarch64`: aarch64 (ARM 64-bit) Coral Mendel Linux 4.0 or Raspberry Pi with Ubuntu Server 20.04.01 LTS 64-bit of 22.04.x LTS 64-bit
 - `native`: 	Your workstation 	It builds with "-mnative" optimization
 
+## Building - Native
+
+```
+PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
+```
