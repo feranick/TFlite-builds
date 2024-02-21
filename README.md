@@ -6,7 +6,7 @@ TFlite cross-platform builds
 
 The information provided in the [official tensorflow lite page for building `whl` packages for ARM](https://www.tensorflow.org/lite/guide/build_cmake_pip) to cross-compile TFlite for different architectures is a good start. However there seem to be several issues. This repo aims at providing more info towards successful compilation. And some binaries as well. 
 
-    The provided builds are fully compatible with  [Coral.ai EdgeTPU through the updated libedgetpu drivers](https://github.com/feranick/libedgetpu).
+The provided builds are fully compatible with  [Coral.ai EdgeTPU through the updated libedgetpu drivers](https://github.com/feranick/libedgetpu).
 
 ## Building - Docker
 
@@ -86,3 +86,7 @@ PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
 ```
 PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
 ```
+
+## Known Issues
+
+Regardless of the method used (docker, native, etc), compilation is VERY RAM intensive (for instance, a typical compilation run using Docker, uses 22GB RAM - the max I have on my system - and 4GB/swap). If your swap is fixed (i.e. cannot be dynamically extended), it may lead to the failure (`Killed signal terminated program cc1plus`)
