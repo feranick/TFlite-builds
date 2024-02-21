@@ -87,6 +87,16 @@ PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
 PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
 ```
 
-## Known Issues
+## WARNING: RAM usage is extensive
 
-Regardless of the method used (docker, native, etc), compilation is VERY RAM intensive (for instance, a typical compilation run using Docker, uses 22GB RAM - the max I have on my system - and 4GB/swap). If your swap is fixed (i.e. cannot be dynamically extended), it may lead to the failure (`Killed signal terminated program cc1plus`)
+Regardless of the method used (docker, native, etc), compilation is VERY RAM intensive (for instance, a typical compilation run using Docker, uses 22GB RAM - the max I have on my system - and 4GB/swap). If your swap is fixed (i.e. cannot be dynamically extended), it may lead to the failure (`Killed signal terminated program cc1plus`). This massive RAM use is due to the lack of limits on the number of processes that can be run during compilation. If you have plenty of RAM, that may be fine. If not, you can restrict the number of processes by changing line 126 in `tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh` from:
+
+```
+cmake --build . --verbose -j ${BUILD_NUM_JOBS} -t _pywrap_tensorflow_interpreter_wrapper
+```
+to:
+```
+cmake --build . --verbose -j XXX -t _pywrap_tensorflow_interpreter_wrapper
+```
+
+where XXX is a number between 1 (single process, slower) and 4 (4 processes, faster but more RAM hungry). 
