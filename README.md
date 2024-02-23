@@ -87,6 +87,22 @@ PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
 PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
 ```
 
+## GPU support for native builds
+When compiling with either `docker` or native using `cmake` GPU support is disableed by default. To enable it, edit this file:
+```
+nano tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+```
+and add to line 110:
+```
+     native)
+       BUILD_FLAGS=${BUILD_FLAGS:-"-march=native -I${PYTHON_INCLUDE} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"}
+       cmake \
+         -DCMAKE_C_FLAGS="${BUILD_FLAGS}" \
+         -DCMAKE_CXX_FLAGS="${BUILD_FLAGS}" \
+  ==>    -DTFLITE_ENABLE_GPU=ON \
+         "${TENSORFLOW_LITE_DIR}"
+```
+
 ## WARNING: RAM usage is extensive
 
 Regardless of the method used (docker, native, etc), compilation is VERY RAM intensive (for instance, a typical compilation run using Docker, uses 22GB RAM - the max I have on my system - and 4GB/swap). If your swap is fixed (i.e. cannot be dynamically extended), it may lead to the failure (`Killed signal terminated program cc1plus`). This massive RAM use is due to the lack of limits on the number of processes that can be run during compilation. If you have plenty of RAM, that may be fine. If not, you can restrict the number of processes by changing line 126 in `tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh` from:
