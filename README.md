@@ -48,6 +48,18 @@ If compiling against `python 3.11` or newer, you have to allow installation of w
     RUN python3 get-pip.py
     RUN rm get-pip.py
 ```
+Optional: update `cmake` by editing `tensorflow/lite/tools/pip_package/Dockerfile.py3` to replace:
+```
+RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.16.8/cmake-3.16.8-Linux-x86_64.sh
+RUN mkdir /opt/cmake
+RUN sh cmake-3.16.8-Linux-x86_64.sh --prefix=/opt/cmake --skip-license
+```
+with:
+```
+RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.27.7/cmake-3.27.7-linux-x86_64.sh
+RUN mkdir /opt/cmake
+RUN sh cmake-3.27.7-linux-x86_64.sh --prefix=/opt/cmake --skip-license
+```
 
 - Edit Makefile to your system `tensorflow/lite/tools/pip_package/Makefile`:
 
@@ -66,7 +78,7 @@ RUN yes | add-apt-repository ppa:deadsnakes/ppa
 - Run compilation (adjust the values for `TENSORFLOW_TARGET` and `PYTHON_VERSION` to fit your needs:
 
 ```
-$ make -C tensorflow/lite/tools/pip_package docker-build TENSORFLOW_TARGET=aarch64 PYTHON_VERSION=3.11
+make -C tensorflow/lite/tools/pip_package docker-build TENSORFLOW_TARGET=aarch64 PYTHON_VERSION=3.11
 ```
 
 These are the supported targets.
