@@ -124,7 +124,7 @@ cmake --build . --verbose -j ${BUILD_NUM_JOBS} -t _pywrap_tensorflow_interpreter
 ```
 to:
 ```
-cmake --build . --verbose -j XXX -t _pywrap_tensorflow_interpreter_wrapper
+cmake --build . --verbose -j $(nproc) -t _pywrap_tensorflow_interpreter_wrapper
 ```
 
-where XXX is a number between 4 (1 process, slower) and 8 (8 processes, faster but more RAM hungry). 
+Alternatively, you can set the value for `$(nproc)` manually, with a number between 4 (1 process, slower) and 8 (8 processes, faster but more RAM hungry). 
