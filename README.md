@@ -115,4 +115,4 @@ to:
 cmake --build . --verbose -j XXX -t _pywrap_tensorflow_interpreter_wrapper
 ```
 
-where XXX is a number between 1 (single process, slower) and 4 (4 processes, faster but more RAM hungry). 
+where XXX is a number between 4 (1 process, slower) and 8 (8 processes, faster but more RAM hungry). 
