@@ -78,8 +78,9 @@ RUN yes | add-apt-repository ppa:deadsnakes/ppa
 - Run compilation (adjust the values for `TENSORFLOW_TARGET` and `PYTHON_VERSION` to fit your needs:
 
 ```
-make -C tensorflow/lite/tools/pip_package docker-build TENSORFLOW_TARGET=aarch64 PYTHON_VERSION=3.11
+BUILD_NUM_JOBS=4 make -C tensorflow/lite/tools/pip_package docker-build TENSORFLOW_TARGET=aarch64 PYTHON_VERSION=3.11
 ```
+Note: You can change the variable `BUILD_NUM_JOBS` from 4 to `$(nproc)` to use the max number of cores in your CPU for fastest compilation.
 
 These are the supported targets.
 
@@ -96,8 +97,9 @@ PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
 
 ### Using CMake
 ```
-PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
+BUILD_NUM_JOBS=4 PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
 ```
+Note: You can change the variable `BUILD_NUM_JOBS` from 4 to `$(nproc)` to use the max number of cores in your CPU for fastest compilation.
 
 ## GPU support for native builds
 When compiling with either `docker` or native using `cmake` GPU support is disableed by default. To enable it, edit this file:
@@ -114,17 +116,3 @@ and add to line 110:
   ==>    -DTFLITE_ENABLE_GPU=ON \
          "${TENSORFLOW_LITE_DIR}"
 ```
-
-## WARNING: RAM usage is extensive
-
-Regardless of the method used (docker, native, etc), compilation is VERY RAM intensive (for instance, a typical compilation run using Docker, uses 22GB RAM - the max I have on my system - and 4GB/swap). If your swap is fixed (i.e. cannot be dynamically extended), it may lead to the failure (`Killed signal terminated program cc1plus`). This massive RAM use is due to the lack of limits on the number of processes that can be run during compilation. If you have plenty of RAM, that may be fine. If not, you can restrict the number of processes by changing line 126 in `tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh` from:
-
-```
-cmake --build . --verbose -j ${BUILD_NUM_JOBS} -t _pywrap_tensorflow_interpreter_wrapper
-```
-to:
-```
-cmake --build . --verbose -j $(nproc) -t _pywrap_tensorflow_interpreter_wrapper
-```
-
-Alternatively, you can set the value for `$(nproc)` manually, with a number between 4 (1 process, slower) and 8 (8 processes, faster but more RAM hungry). 
