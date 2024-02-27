@@ -63,11 +63,19 @@ RUN sh cmake-3.27.7-linux-x86_64.sh --prefix=/opt/cmake --skip-license
 
 - Edit Makefile to your system `tensorflow/lite/tools/pip_package/Makefile`:
 
+For `Python 3.11` and earlier:
 ```
 # Values: debian:<version>, ubuntu:<version>
 BASE_IMAGE ?= ubuntu:22.04
 PYTHON_VERSION ?= 3.11
-NUMPY_VERSION ?= 1.24.2
+NUMPY_VERSION ?= 1.24.4
+```
+For `Python 3.12` and later:
+```
+# Values: debian:<version>, ubuntu:<version>
+BASE_IMAGE ?= ubuntu:22.04
+PYTHON_VERSION ?= 3.12
+NUMPY_VERSION ?= 1.26.4
 ```
 
 Note: if you are building against Ubuntu, this is all you need to change. If you are building for `debian:bookworm` or `debian:bullseye`, you need to remove/comment the following line from `tensorflow/lite/tools/pip_package/Dockerfile.py3`, since the added ppa repository is specific only to ubuntu.
