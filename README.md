@@ -56,9 +56,9 @@ RUN sh cmake-3.16.8-Linux-x86_64.sh --prefix=/opt/cmake --skip-license
 ```
 with:
 ```
-RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.27.7/cmake-3.27.7-linux-x86_64.sh
+RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.29.6/cmake-3.29.6-linux-x86_64.sh
 RUN mkdir /opt/cmake
-RUN sh cmake-3.27.7-linux-x86_64.sh --prefix=/opt/cmake --skip-license
+RUN sh cmake-3.29.6-linux-x86_64.sh --prefix=/opt/cmake --skip-license
 ```
 
 - Edit Makefile to your system `tensorflow/lite/tools/pip_package/Makefile`:
