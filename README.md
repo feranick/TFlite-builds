@@ -23,23 +23,6 @@ $ cd tensorflow
 $ git checkout vX.XX.XX
 ```
 
-- Modify the file `tensorflow/lite/tools/pip_package/Dockerfile.py3` to add missing dependencies (`apt-utils` and `tzdata`)
-
-```
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
-    apt-get install -y \
-      apt-utils \
-      build-essential \
-      software-properties-common \
-      zlib1g-dev  \
-      curl \
-      wget \
-      unzip \
-      tzdata \
-      git && \
-    apt-get clean
-```
 If compiling against `python 3.11` or newer, you have to allow installation of whl packages from external sources. Add the following line in `tensorflow/lite/tools/pip_package/Dockerfile.py3`:
 ```
     RUN ln -sf /usr/bin/python$PYTHON_VERSION /usr/bin/python3
