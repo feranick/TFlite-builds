@@ -17,11 +17,10 @@ The provided builds are fully compatible with  [Coral.ai EdgeTPU through the upd
 
 - Download tensorflow and checkout the relevant version.
 
-##
     git clone https://github.com/tensorflow/tensorflow.git
-##
+
     cd tensorflow
-##
+
     git checkout vX.XX.XX
 
 
