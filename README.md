@@ -2,7 +2,7 @@
 
 TFlite cross-platform builds
 
-##Why this repo?
+## Why this repo?
 
 The information provided in the [official tensorflow lite page for building `whl` packages for ARM](https://www.tensorflow.org/lite/guide/build_cmake_pip) to cross-compile TFlite for different architectures is a good start. However there seem to be several issues. This repo aims at providing more info towards successful compilation. And some binaries as well. 
 
@@ -12,16 +12,18 @@ The provided builds are fully compatible with  [Coral.ai EdgeTPU through the upd
 
 - Install docker:
 
-```
-$ sudo apt install docker.io
-```
+##
+    sudo apt install docker.io
+
 - Download tensorflow and checkout the relevant version.
 
-```
-$ git clone https://github.com/tensorflow/tensorflow.git
-$ cd tensorflow
-$ git checkout vX.XX.XX
-```
+##
+    git clone https://github.com/tensorflow/tensorflow.git
+##
+    cd tensorflow
+##
+    git checkout vX.XX.XX
+
 
 If compiling against `python 3.11` or newer, you have to allow installation of whl packages from external sources. Add the following line in `tensorflow/lite/tools/pip_package/Dockerfile.py3`:
 ```
@@ -82,21 +84,23 @@ These are the supported targets.
 
 ## Building - Native
 ### Using Bazel
-```
-PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
-```
+
+##
+    PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
+
 
 ### Using CMake
-```
-BUILD_NUM_JOBS=4 PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
-```
+##
+    BUILD_NUM_JOBS=4 PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
+
 Note: You can change the variable `BUILD_NUM_JOBS` from 4 to `$(nproc)` to use the max number of cores in your CPU for fastest compilation.
 
 ## GPU support for native builds
 When compiling with either `docker` or native using `cmake` GPU support is disableed by default. To enable it, edit this file:
-```
-nano tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
-```
+
+##
+    nano tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+
 and add to line 110:
 ```
      native)
