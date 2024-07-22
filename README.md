@@ -17,11 +17,12 @@ The provided builds are fully compatible with  [Coral.ai EdgeTPU through the upd
 
 - Download tensorflow and checkout the relevant version.
 
-```git clone https://github.com/tensorflow/tensorflow.git```
-
-```cd tensorflow```
-
-```git checkout vX.XX.XX````
+##
+    git clone https://github.com/tensorflow/tensorflow.git
+##
+    cd tensorflow
+##
+    git checkout vX.XX.XX
 
 
 If compiling against `python 3.11` or newer, you have to allow installation of whl packages from external sources. Add the following line in `tensorflow/lite/tools/pip_package/Dockerfile.py3`:
