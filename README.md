@@ -62,13 +62,52 @@ BASE_IMAGE ?= ubuntu:22.04
 PYTHON_VERSION ?= 3.12
 NUMPY_VERSION ?= 1.26.4
 ```
-For `Ubuntu 24.04` and newer, replace the file `tensorflow/lite/tools/pip_package/update_sources.sh` with the one provided in this repository.
 
-Note: if you are building against Ubuntu, this is all you need to change. If you are building for `debian:bookworm` or `debian:bullseye`, you need to remove/comment the following line from `tensorflow/lite/tools/pip_package/Dockerfile.py3`, since the added ppa repository is specific only to ubuntu.
+### Changes specific to Ubuntu 24.04 and newer
+
+- Replace the file `tensorflow/lite/tools/pip_package/update_sources.sh` with the one provided in this repository.
+- In the file `tensorflow/lite/tools/pip_package/Makefile` replace: 
+
+```
+docker-build: docker-image
+	mkdir -p $(TENSORFLOW_DIR)/bazel-ci_build-cache
+	docker run \
+		--rm --interactive $(shell tty -s && echo --tty) \
+		$(DOCKER_PARAMS) \
+		$(TAG_IMAGE) \
+		/with_the_same_user /bin/bash -C /tensorflow/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh $(TENSORFLOW_TARGET)
+  ```
+  with 
+  ```
+  docker-build: docker-image
+	mkdir -p $(TENSORFLOW_DIR)/bazel-ci_build-cache
+	docker run \
+		--rm --interactive $(shell tty -s && echo --tty) \
+		$(DOCKER_PARAMS) \
+		$(TAG_IMAGE) \
+        /bin/bash -C /tensorflow/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh $(TENSORFLOW_TARGET)
+  ```    
+  
+- In the file `tensorflow/lite/tools/pip_package/Makefile` remove:
+```
+python$PYTHON_VERSION \
+      python$PYTHON_VERSION-dev \
+      python$PYTHON_VERSION-venv \
+-->   python$PYTHON_VERSION-distutils \
+      libpython$PYTHON_VERSION-dev \
+      libpython$PYTHON_VERSION-dev:armhf \
+      libpython$PYTHON_VERSION-dev:arm64
+```
+
+### Building using Debian
+If you are building for `debian:bookworm` or `debian:bullseye`, you need to remove/comment the following line from `tensorflow/lite/tools/pip_package/Dockerfile.py3`, since the added ppa repository is specific only to ubuntu.
 
 ```
 RUN yes | add-apt-repository ppa:deadsnakes/ppa
 ```
+
+### Compilation
+
 - Run compilation (adjust the values for `TENSORFLOW_TARGET` and `PYTHON_VERSION` to fit your needs:
 
 ```
