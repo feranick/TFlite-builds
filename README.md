@@ -29,7 +29,7 @@ If compiling against `python 3.11` or newer, you have to allow installation of w
 ```
     RUN ln -sf /usr/bin/python$PYTHON_VERSION /usr/bin/python3
     RUN curl -OL https://bootstrap.pypa.io/get-pip.py
-->  RUN rm /usr/lib/python3.11/EXTERNALLY-MANAGED
+->  RUN rm /usr/lib/python$PYTHON_VERSION/EXTERNALLY-MANAGED
     RUN python3 get-pip.py
     RUN rm get-pip.py
 ```
@@ -41,7 +41,7 @@ RUN sh cmake-3.16.8-Linux-x86_64.sh --prefix=/opt/cmake --skip-license
 ```
 with:
 ```
-RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.29.6/cmake-3.29.6-linux-x86_64.sh
+RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.30.4/cmake-3.30.4-linux-x86_64.sh
 RUN mkdir /opt/cmake
 RUN sh cmake-3.29.6-linux-x86_64.sh --prefix=/opt/cmake --skip-license
 ```
