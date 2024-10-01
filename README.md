@@ -62,6 +62,7 @@ BASE_IMAGE ?= ubuntu:22.04
 PYTHON_VERSION ?= 3.12
 NUMPY_VERSION ?= 1.26.4
 ```
+For `Ubuntu 24.04` and newer, replace the file `tensorflow/lite/tools/pip_package/update_sources.sh` with the one provided in this repository.
 
 Note: if you are building against Ubuntu, this is all you need to change. If you are building for `debian:bookworm` or `debian:bullseye`, you need to remove/comment the following line from `tensorflow/lite/tools/pip_package/Dockerfile.py3`, since the added ppa repository is specific only to ubuntu.
 
