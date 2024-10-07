@@ -43,7 +43,7 @@ with:
 ```
 RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.30.4/cmake-3.30.4-linux-x86_64.sh
 RUN mkdir /opt/cmake
-RUN sh cmake-3.29.6-linux-x86_64.sh --prefix=/opt/cmake --skip-license
+RUN sh cmake-3.30.4-linux-x86_64.sh --prefix=/opt/cmake --skip-license
 ```
 
 - Edit Makefile to your system `tensorflow/lite/tools/pip_package/Makefile`:
@@ -88,7 +88,7 @@ docker-build: docker-image
         /bin/bash -C /tensorflow/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh $(TENSORFLOW_TARGET)
   ```    
   
-- In the file `tensorflow/lite/tools/pip_package/Makefile` remove:
+- In the file `tensorflow/lite/tools/pip_package/Dockerfile.py3` remove:
 ```
 python$PYTHON_VERSION \
       python$PYTHON_VERSION-dev \
