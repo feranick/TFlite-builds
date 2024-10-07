@@ -88,7 +88,7 @@ docker-build: docker-image
         /bin/bash -C /tensorflow/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh $(TENSORFLOW_TARGET)
   ```    
   
-- In the file `tensorflow/lite/tools/pip_package/Makefile` remove:
+- In the file `tensorflow/lite/tools/pip_package/Dockerfile.py3` remove:
 ```
 python$PYTHON_VERSION \
       python$PYTHON_VERSION-dev \
