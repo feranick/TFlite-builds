@@ -1,6 +1,6 @@
 # TFlite-builds
 
-TFlite cross-platform builds
+TFlite cross-platform builds. Current stable version: `2.17.1`.
 
 ## Why this repo?
 
