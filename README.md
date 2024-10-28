@@ -41,7 +41,7 @@ RUN sh cmake-3.16.8-Linux-x86_64.sh --prefix=/opt/cmake --skip-license
 ```
 with:
 ```
-RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.30.4/cmake-3.30.4-linux-x86_64.sh
+RUN curl -OL https://github.com/Kitware/CMake/releases/download/v3.29.6/cmake-3.29.6-linux-x86_64.sh
 RUN mkdir /opt/cmake
 RUN sh cmake-3.29.6-linux-x86_64.sh --prefix=/opt/cmake --skip-license
 ```
