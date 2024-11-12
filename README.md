@@ -126,7 +126,7 @@ These are the supported targets.
 ### Using Bazel
 
 ##
-    PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
+    export TF_PYTHON_VERSION=3.12; PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
 
 
 ### Using CMake
